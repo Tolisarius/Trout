@@ -9,18 +9,28 @@ public class Player : MonoBehaviour
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
-    public Vector2 wallJumpClimb;
-    public Vector2 wallJumpOff;
-    public Vector2 wallLeap;
-
 
     [Space(10)]
     [Header("Movement")]
     public float moveSpeed = 6;
     public float accelerationTimeAirborne = .2f;
     public float accelerationTimeGrounded = .1f;
+
+    [Space(10)]
+    [Header("Wall")]
     public float wallSlideSpeedMax = 3;
     public float wallStickTime = .25f;
+    public Vector2 wallJumpOff;
+
+    [Header("Wall climb")]
+    public bool wallClimbEnabled;
+    public Vector2 wallJumpClimb;
+
+
+    [Header("Wall leap")]
+    public bool wallLeapEnabled;
+    public bool wallLeapDirectionRequired;
+    public Vector2 wallLeap;
 
     float timeToWallUnstick;
 
@@ -38,12 +48,10 @@ public class Player : MonoBehaviour
     int wallDirX;
     string currentDirection;
 
-
     void Start()
     {
         controller = GetComponent<Controller2D>();
         controllerStates = controller.controllerStates;
-        //controllerStates = GetComponent<ControllerStates>();       
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -56,55 +64,58 @@ public class Player : MonoBehaviour
         {
             currentDirection = "right";
         }
-
     }
 
     void Update()
     {
+        EveryFrame();
+    }
+
+    void EveryFrame()
+    {
         CalculateVelocity();
         HandleWallSliding();
+        HandleWallFallOff();
 
         controller.Move(velocity * Time.deltaTime, directionalInput);
-        CharacterDirection();
 
-        if (controllerStates.IsCollidingAbove || controllerStates.IsCollidingBelow)
-        {
-            if (controllerStates.slidingDownMaxSlope)
-            {
-                velocity.y += controllerStates.slopeNormal.y * -gravity * Time.deltaTime;
-            }
-            else
-            {
-                velocity.y = 0;
-            }
-        }
+        VerticalCollisionsHandling();       // must be AFTER controller.Move
+        HandleCharacterDirection();
     }
+
+    /// <summary>
+    /// Input reactions
+    /// </summary>
 
     public void SetDirectionalInput(Vector2 input)
     {
         directionalInput = input;
-    }
+    }    
 
     public void OnJumpInputDown()
     {
-        if (wallSliding)
+        /// first what to do if Player is wallsliding
+        if (wallSliding)        
         {
-            if (wallDirX == directionalInput.x)
+            if (wallClimbEnabled && (wallDirX == directionalInput.x))
             {
-                velocity.x = -wallDirX * wallJumpClimb.x;
-                velocity.y = wallJumpClimb.y;
+                WallClimb();
             }
-            else if (directionalInput.x == 0)
+
+            if (wallLeapEnabled)
             {
-                velocity.x = -wallDirX * wallJumpOff.x;
-                velocity.y = wallJumpOff.y;
-            }
-            else
-            {
-                velocity.x = -wallDirX * wallLeap.x;
-                velocity.y = wallLeap.y;
+                if (wallLeapDirectionRequired && wallDirX == directionalInput.x * -1)
+                {
+                    WallLeap();
+                }
+                else if ((!wallLeapDirectionRequired && !wallClimbEnabled) || (wallClimbEnabled && (wallDirX != directionalInput.x || directionalInput.x == 0)))
+                {
+                    WallLeap();
+                }
             }
         }
+        
+        /// normal jump
         if (controllerStates.IsCollidingBelow || controllerStates.JustLeftPlatform)
         {
             controllerStates.IsNormalJumping = true;
@@ -124,7 +135,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     public void OnJumpInputUp()
     {
         if (velocity.y > minJumpVelocity)
@@ -133,7 +143,20 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Physics stuff
+    /// </summary>
+    void HandleCharacterDirection()
+    {
+        if (controllerStates.faceDir == -1)
+        {
+            SwitchFaceOrientation("left");
+        }
+        if (controllerStates.faceDir == 1)
+        {
+            SwitchFaceOrientation("right");
+        }
+    }
     void HandleWallSliding()
     {
         wallDirX = (controllerStates.IsCollidingLeft) ? -1 : 1;
@@ -165,30 +188,41 @@ public class Player : MonoBehaviour
             {
                 timeToWallUnstick = wallStickTime;
             }
-
         }
-
     }
-
+    void HandleWallFallOff()    // when Player is sliding the wall and gives input away from it
+    {
+        if (wallSliding && wallDirX == directionalInput.x * -1)
+        {
+            velocity.x = -wallDirX * wallJumpOff.x;
+            velocity.y = wallJumpOff.y;
+        }
+    }
     void CalculateVelocity()
     {
         float targetVelocityX = directionalInput.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controllerStates.IsCollidingBelow) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
     }
-
-    void CharacterDirection()
+    void VerticalCollisionsHandling()
     {
-        if (controllerStates.faceDir == -1)
+        if (controllerStates.IsCollidingAbove || controllerStates.IsCollidingBelow)
         {
-            SwitchFaceOrientation("left");
-        }
-        if (controllerStates.faceDir == 1)
-        {
-            SwitchFaceOrientation("right");
+            if (controllerStates.slidingDownMaxSlope)
+            {
+                velocity.y += controllerStates.slopeNormal.y * -gravity * Time.deltaTime;
+            }
+            else
+            {
+                velocity.y = 0;
+            }
         }
     }
 
+    /// <summary>
+    ///  Player methods
+    /// </summary>
+    /// 
     public void SwitchFaceOrientation(string dir)
 
     {
@@ -205,6 +239,16 @@ public class Player : MonoBehaviour
             currentDirection = "right";
         }
         gameObject.transform.localScale = newScale;
+    }
+    void WallLeap()
+    {
+        velocity.x = -wallDirX * wallLeap.x;
+        velocity.y = wallLeap.y;
+    }
+    void WallClimb()
+    {
+        velocity.x = -wallDirX * wallJumpClimb.x;
+        velocity.y = wallJumpClimb.y;
     }
 
 }
