@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     [Header("Wall leap")]
     public bool wallLeapEnabled;
     public bool wallLeapDirectionRequired;
-    public float wallLeapAfterWallBuffer;
+    public float wallLeapAfterWallBuffer,wallLeapAfterButtonBuffer;
     public Vector2 wallLeap;
 
     float timeToWallUnstick;
@@ -49,10 +49,12 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public Vector2 directionalInput;
-    Vector2 _directionalInputBuffer;
-
-
+    Vector2 _directionalInputBuffer;   
+    bool _jumpPressed, _jumpPressedBuffer;
     int _wallDirX, _wallDirXBuffer;
+
+    bool _directionalInputRestrictedX, _directionalInputRestrictedY;
+
     string currentDirection;
 
     void Start()
@@ -99,47 +101,64 @@ public class Player : MonoBehaviour
 
     public void SetDirectionalInput(Vector2 input)
     {
+
         directionalInput = input;
+        if (_directionalInputRestrictedX)
+        {
+            directionalInput.x = 0;
+        }
+        if (_directionalInputRestrictedY)
+        {
+            directionalInput.y = 0;
+        }
+        
+
     }    
 
     public void OnJumpInputDown()
     {
+        _jumpPressed = true;
         /// WALL LEAPS
-            /// <summary>
-            /// Different behavior for wall leap based on whether the directional input is or is not required
-            /// If it is required, Player can both push first jump button and then direction or first give direction and then push button, rarely both at the same time
-            /// If direction is given first, there is a buffer after wall slide within Jump stil registers as a wall leap
-            /// If jump is given first, there is a buffer for giving input equally
-            /// </summary>
+        /// <summary>
+        /// Different behavior for wall leap based on whether the directional input is or is not required
+        /// If it is required, Player can both push first jump button and then direction or first give direction and then push button, rarely both at the same time
+        /// If direction is given first, there is a buffer after wall slide within Jump stil registers as a wall leap
+        /// If jump is given first, there is a buffer for giving input equally
+        /// </summary>
+        if (playerStates.IsWallSliding && !_jumpPressedBuffer)     //put in buffer if the jump input was given before leaving the wall
+        {
+            _jumpPressedBuffer = true;
+            Invoke("JustPressedButtonOnWallSlide", wallLeapAfterButtonBuffer);
+        }
 
         if (playerStates.IsWallSliding && wallLeapEnabled)      
         {
             if (wallLeapDirectionRequired)
             {
-                if (directionalInput.x == _wallDirX * -1)        //if the input given by Player is away from the wall
+                if (directionalInput.x == _wallDirX * -1)                            //if the input given by Player is away from the wall
                 {
                     playerJumps.WallLeap(_wallDirX);
                 }
-                else                                            //this for the case that Player presses Jump first, direction later
+                else                                                                //this for the case that Player presses Jump first, direction later
                 {
                     print("wait for directional input buffer");
                 }
             }
-            else                                                //if directional input is not required at all
+            else                                                                 //if directional input is not required at all
             {
                 playerJumps.WallLeap(_wallDirXBuffer);
             }
         }
 
-        if (playerStates.AfterWallslideBuffer && wallLeapEnabled)       //this is for the case Player presses jump AFTER leaving the wall
+        if (playerStates.AfterWallslideBuffer && wallLeapEnabled)                //this is for the case Player presses jump AFTER leaving the wall
         {
             if (wallLeapDirectionRequired) { 
-                if (_directionalInputBuffer.x == _wallDirXBuffer * -1)        //if the input that has been given when Player left the wall was away from the it
+                if (_directionalInputBuffer.x == _wallDirXBuffer * -1)           //if the input that has been given when Player left the wall was away from the it
                 {
                     playerJumps.WallLeap(_wallDirXBuffer);
                 }
             }
-            else                                                        //if directional input is not required at all
+            else                                                                //if directional input is not required at all
             {
                 playerJumps.WallLeap(_wallDirXBuffer);
             }
@@ -154,6 +173,7 @@ public class Player : MonoBehaviour
     }
     public void OnJumpInputUp()
     {
+        _jumpPressed = false;
         if (velocity.y > minJumpVelocity)
         {
             velocity.y = minJumpVelocity;
@@ -183,6 +203,8 @@ public class Player : MonoBehaviour
             playerStates.IsWallSliding = true;
             _wallDirXBuffer = _wallDirX;                        //save current wallDirX and current directional input for a buffer
 
+
+
             if (velocity.y < -wallSlideSpeedMax)
             {
                 velocity.y = -wallSlideSpeedMax;
@@ -210,13 +232,19 @@ public class Player : MonoBehaviour
     }
     void HandleWallFallOff()    // when Player is sliding the wall and gives input away from it
     {
-        if (playerStates.IsWallSliding && _wallDirX == directionalInput.x * -1)
-        {           
+        if (playerStates.IsWallSliding && _wallDirX == directionalInput.x * -1 && _jumpPressedBuffer)   //if Player gives direction input after pressing jump while wallSliding
+        {
+            playerJumps.WallLeap(_wallDirX);
+        }
+        else if (playerStates.IsWallSliding && _wallDirX == directionalInput.x * -1 && !_jumpPressedBuffer) //normal fallOff
+        {
             velocity.x = -_wallDirX * wallJumpOff.x;
             velocity.y = wallJumpOff.y;
-            playerStates.AfterWallslideBuffer = true;
-        
 
+            if (!playerStates.AfterWallslideBuffer) //putting in buffer for case the jump has not been pressed yet
+            { 
+                playerStates.AfterWallslideBuffer = true;
+            }
         }
     }
     void CalculateVelocity()
@@ -244,28 +272,32 @@ public class Player : MonoBehaviour
 
     void TimeTravelingTests()
     {
-
         if (playerStates.WasWallSliding && !playerStates.IsWallSliding)
         {
             //print("Just has left wallsliding");            
             _directionalInputBuffer = directionalInput;
-            Invoke("JustLeftWallSlideBuffer", wallLeapAfterWallBuffer);
+            Invoke("JustLeftWallSlideBuffer", wallLeapAfterWallBuffer);           
         }
         if (!playerStates.WasWallSliding && playerStates.IsWallSliding)
         {
-           
             //print("Just has STARTED wallsliding");
-            
         }
-
         playerStates.WasWallSliding = playerStates.IsWallSliding;       
     }
-    
+
+    /// <summary>
+    ///  BUFFERS
+    /// </summary>
+    /// 
     void JustLeftWallSlideBuffer()
     {
         playerStates.AfterWallslideBuffer = false;
         _wallDirXBuffer =0;                                //reset wallDirXBuffer for next use
         print("AfterWallsslidebuffer:" + playerStates.AfterWallslideBuffer);
+    }
+    void JustPressedButtonOnWallSlide()
+    {
+        _jumpPressedBuffer = false;
     }
 
 
@@ -274,7 +306,6 @@ public class Player : MonoBehaviour
 /// </summary>
 /// 
 public void SwitchFaceOrientation(string dir)
-
     {
         Vector2 newScale = gameObject.transform.localScale;
         if (dir == "left")
@@ -282,7 +313,6 @@ public void SwitchFaceOrientation(string dir)
             newScale.x = Mathf.Abs(newScale.x);
             currentDirection = "left";
         }
-
         else if (dir == "right")
         {
             newScale.x = Mathf.Abs(newScale.x) * -1;
@@ -290,6 +320,26 @@ public void SwitchFaceOrientation(string dir)
         }
         gameObject.transform.localScale = newScale;
     }
-   
+
+public void RestrictMovement(bool xAxisrestricted, bool yAxisRestricted)
+    {
+        if (xAxisrestricted)
+        {
+            _directionalInputRestrictedX = true;           
+        }
+        else
+        {
+            _directionalInputRestrictedX = false;
+        }
+
+        if (yAxisRestricted)
+        {
+            _directionalInputRestrictedY = true;
+        }
+        else
+        {
+            _directionalInputRestrictedY = false;
+        }
+    }
 
 }

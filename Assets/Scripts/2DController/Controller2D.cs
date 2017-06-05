@@ -36,7 +36,8 @@ public class Controller2D : RaycastController
         if (!_wasGrounded && controllerStates.IsGrounded)
         {
             controllerStates.JustGotGrounded = true;
-            //print("Just got grounded");
+            SendMessage("JustGotGrounded");
+            print("Just got grounded");
         }
         else
         {

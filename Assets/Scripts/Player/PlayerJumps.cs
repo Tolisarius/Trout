@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class PlayerJumps : MonoBehaviour {
 
-    Player player;    
+    Player player;
+    ControllerStates controllerStates;
 
     void Start ()
     {
 		player = GetComponent<Player>();
+       
     }
 
     public void WallLeap(int wallDirX)
     {
         player.velocity.x = -wallDirX * player.wallLeap.x;
         player.velocity.y = player.wallLeap.y;
+        player.RestrictMovement(true, false);
     }
 
     public void WallClimb(int wallDirX)
@@ -39,5 +42,11 @@ public class PlayerJumps : MonoBehaviour {
         {
             player.velocity.y = player.maxJumpVelocity;
         }
+    }
+
+    void JustGotGrounded()
+    {    
+     print("You have my permission to move voe!");
+     player.RestrictMovement(false, false);   
     }
 }
