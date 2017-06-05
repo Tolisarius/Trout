@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerStates
+public class ControllerStates : MonoBehaviour
 {
 
-    
+
     ///All properties regarding controller and controller alone- collisions, movement states etc.
     /// is the character colliding right ?
-    
+
     public bool IsCollidingRight { get; set; }
     /// is the character colliding left ?
     public bool IsCollidingLeft { get; set; }
@@ -26,6 +26,7 @@ public class ControllerStates
 
     public float slopeAngle { get; set; }
     public float slopeAngleOld { get; set; }
+    [HideInInspector]
     public Vector2 slopeNormal;
     public Vector2 moveAmountOld { get; set; }
     public int faceDir { get; set; }

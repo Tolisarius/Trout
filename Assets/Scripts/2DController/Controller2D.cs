@@ -36,7 +36,7 @@ public class Controller2D : RaycastController
         if (!_wasGrounded && controllerStates.IsGrounded)
         {
             controllerStates.JustGotGrounded = true;
-            print("Just got grounded");
+            //print("Just got grounded");
         }
         else
         {
@@ -45,14 +45,14 @@ public class Controller2D : RaycastController
 
         if (_wasGrounded && !controllerStates.IsGrounded && !controllerStates.IsNormalJumping)
         {
-            print("Just left platform");
+            //print("Just left platform");
             controllerStates.JustLeftPlatform = true;
             Invoke("JustLeftPlatformBuffer", _afterPlatformBuffer);
         }
         /// has controller just left a moving platform
         if (_wasOnMovingPlatformLastFrame == true && controllerStates.isStandingOnPlatform == false)
         {
-            print("prave opustil movable platformu");
+            //print("prave opustil movable platformu");
         }
 
         /// is controller falling?

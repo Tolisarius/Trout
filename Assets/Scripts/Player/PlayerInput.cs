@@ -19,7 +19,6 @@ public class PlayerInput : MonoBehaviour
 
         if(Input.GetButtonDown("Jump"))       
         {
-            print("Skacu?");
             player.OnJumpInputDown();
         }
         if(Input.GetButtonUp("Jump"))       
