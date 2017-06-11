@@ -28,8 +28,8 @@ public class Controller2D : RaycastController
     private void Update()
     {
         TimeTravellingTests();
+        
     }
-
     void TimeTravellingTests()
     {
         //has controller just grounded?
@@ -58,7 +58,7 @@ public class Controller2D : RaycastController
 
         /// is controller falling?
         Vector2 _currentPosition = gameObject.transform.position;
-        if ((_currentPosition.y + _smallMovement.y < _oldPosition.y) && controllerStates.isStandingOnPlatform == false)
+        if ((_currentPosition.y + _smallMovement.y < _oldPosition.y) && !controllerStates.isStandingOnPlatform && !controllerStates.descendingSlope)
         {
             controllerStates.IsFalling = true;
         }
@@ -215,7 +215,7 @@ public class Controller2D : RaycastController
                 if (controllerStates.climbingSlope)
                 {
                     moveAmount.x = moveAmount.y / Mathf.Tan(controllerStates.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveAmount.x);
-                }
+                }               
 
                 controllerStates.IsCollidingBelow = directionY == -1;
                 controllerStates.IsCollidingAbove = directionY == 1;    

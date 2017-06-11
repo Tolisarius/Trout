@@ -15,14 +15,25 @@ public class PlayerStates : MonoBehaviour {
     public bool WasWallSliding { get; set; }    //was wall sliding last frame
     public bool WillWallSliding { get; set; }   //just touched the wall is about to wall slide
 
-    //permitters
 
     public bool AfterWallslideBuffer { get; set; }
 
+    ControllerStates controllerStates;
+    Player player;
+
+    public enum State
+    {
+        current, standing, walking, jumping,falling
+    }
+
+    public State currentState=State.standing;
 
 
-
-
+    void Start()
+    {
+        controllerStates = GetComponent<ControllerStates>();
+        player = GetComponent<Player>();
+    }
 
     private void Reset()
     {
@@ -32,3 +43,4 @@ public class PlayerStates : MonoBehaviour {
 
 
 }
+

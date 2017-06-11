@@ -10,8 +10,7 @@ public class PlayerJumps : MonoBehaviour {
 
     void Start ()
     {
-		player = GetComponent<Player>();
-       
+		player = GetComponent<Player>();      
     }
 
     public void WallLeap(int wallDirX)
@@ -44,9 +43,14 @@ public class PlayerJumps : MonoBehaviour {
         }
     }
 
+    // REACTIONS ON EVENTS
+
+    void JustHitTheWallSliding()
+    {
+        player.RestrictMovement(false, false);
+    }
     void JustGotGrounded()
-    {    
-     print("You have my permission to move voe!");
+    {        
      player.RestrictMovement(false, false);   
     }
 }

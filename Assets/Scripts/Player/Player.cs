@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     [Header("Wall leap")]
     public bool wallLeapEnabled;
     public bool wallLeapDirectionRequired;
-    public float wallLeapAfterWallBuffer,wallLeapAfterButtonBuffer;
+    public float wallLeapAfterWallBuffer, wallLeapAfterButtonBuffer;
     public Vector2 wallLeap;
 
     float timeToWallUnstick;
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public Vector2 directionalInput;
-    Vector2 _directionalInputBuffer;   
+    Vector2 _directionalInputBuffer;
     bool _jumpPressed, _jumpPressedBuffer;
     int _wallDirX, _wallDirXBuffer;
 
@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
         EveryFrame();
     }
 
+
     void EveryFrame()
     {
         TimeTravelingTests();
@@ -93,7 +94,10 @@ public class Player : MonoBehaviour
 
         VerticalCollisionsHandling();       // must be AFTER controller.Move
         HandleCharacterDirection();
+        PlayerStates();
+
     }
+
 
     /// <summary>
     /// Input reactions
@@ -111,13 +115,15 @@ public class Player : MonoBehaviour
         {
             directionalInput.y = 0;
         }
-        
 
-    }    
+
+    }
 
     public void OnJumpInputDown()
     {
         _jumpPressed = true;
+        // WALL CLIMB
+
         /// WALL LEAPS
         /// <summary>
         /// Different behavior for wall leap based on whether the directional input is or is not required
@@ -131,7 +137,7 @@ public class Player : MonoBehaviour
             Invoke("JustPressedButtonOnWallSlide", wallLeapAfterButtonBuffer);
         }
 
-        if (playerStates.IsWallSliding && wallLeapEnabled)      
+        if (playerStates.IsWallSliding && wallLeapEnabled)
         {
             if (wallLeapDirectionRequired)
             {
@@ -152,7 +158,7 @@ public class Player : MonoBehaviour
 
         if (playerStates.AfterWallslideBuffer && wallLeapEnabled)                //this is for the case Player presses jump AFTER leaving the wall
         {
-            if (wallLeapDirectionRequired) { 
+            if (wallLeapDirectionRequired) {
                 if (_directionalInputBuffer.x == _wallDirXBuffer * -1)           //if the input that has been given when Player left the wall was away from the it
                 {
                     playerJumps.WallLeap(_wallDirXBuffer);
@@ -163,12 +169,12 @@ public class Player : MonoBehaviour
                 playerJumps.WallLeap(_wallDirXBuffer);
             }
         }
-        
+
         /// NORMAL JUMP
-        if (controllerStates.IsCollidingBelow || controllerStates.JustLeftPlatform)
+        if (controllerStates.IsGrounded || controllerStates.JustLeftPlatform)
         {
             controllerStates.IsNormalJumping = true;
-            playerJumps.NormalJump();          
+            playerJumps.NormalJump();
         }
     }
     public void OnJumpInputUp()
@@ -202,8 +208,6 @@ public class Player : MonoBehaviour
         {
             playerStates.IsWallSliding = true;
             _wallDirXBuffer = _wallDirX;                        //save current wallDirX and current directional input for a buffer
-
-
 
             if (velocity.y < -wallSlideSpeedMax)
             {
@@ -242,7 +246,7 @@ public class Player : MonoBehaviour
             velocity.y = wallJumpOff.y;
 
             if (!playerStates.AfterWallslideBuffer) //putting in buffer for case the jump has not been pressed yet
-            { 
+            {
                 playerStates.AfterWallslideBuffer = true;
             }
         }
@@ -250,7 +254,7 @@ public class Player : MonoBehaviour
     void CalculateVelocity()
     {
         float targetVelocityX = directionalInput.x * moveSpeed;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controllerStates.IsCollidingBelow) ? accelerationTimeGrounded : accelerationTimeAirborne);    
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controllerStates.IsCollidingBelow) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
     }
     void VerticalCollisionsHandling()
@@ -272,17 +276,18 @@ public class Player : MonoBehaviour
 
     void TimeTravelingTests()
     {
-        if (playerStates.WasWallSliding && !playerStates.IsWallSliding)
+        if (playerStates.WasWallSliding && !playerStates.IsWallSliding)            //print("Just has left wallsliding");   
         {
-            //print("Just has left wallsliding");            
+
             _directionalInputBuffer = directionalInput;
-            Invoke("JustLeftWallSlideBuffer", wallLeapAfterWallBuffer);           
+            Invoke("JustLeftWallSlideBuffer", wallLeapAfterWallBuffer);
         }
-        if (!playerStates.WasWallSliding && playerStates.IsWallSliding)
+        if (!playerStates.WasWallSliding && playerStates.IsWallSliding)         //print("Just has STARTED wallsliding");
         {
-            //print("Just has STARTED wallsliding");
+
+            SendMessage("JustHitTheWallSliding");
         }
-        playerStates.WasWallSliding = playerStates.IsWallSliding;       
+        playerStates.WasWallSliding = playerStates.IsWallSliding;
     }
 
     /// <summary>
@@ -292,7 +297,7 @@ public class Player : MonoBehaviour
     void JustLeftWallSlideBuffer()
     {
         playerStates.AfterWallslideBuffer = false;
-        _wallDirXBuffer =0;                                //reset wallDirXBuffer for next use
+        _wallDirXBuffer = 0;                                //reset wallDirXBuffer for next use
         print("AfterWallsslidebuffer:" + playerStates.AfterWallslideBuffer);
     }
     void JustPressedButtonOnWallSlide()
@@ -301,11 +306,11 @@ public class Player : MonoBehaviour
     }
 
 
-/// <summary>
-///  Player methods
-/// </summary>
-/// 
-public void SwitchFaceOrientation(string dir)
+    /// <summary>
+    ///  Player methods
+    /// </summary>
+    /// 
+    public void SwitchFaceOrientation(string dir)
     {
         Vector2 newScale = gameObject.transform.localScale;
         if (dir == "left")
@@ -321,11 +326,11 @@ public void SwitchFaceOrientation(string dir)
         gameObject.transform.localScale = newScale;
     }
 
-public void RestrictMovement(bool xAxisrestricted, bool yAxisRestricted)
+    public void RestrictMovement(bool xAxisrestricted, bool yAxisRestricted)
     {
         if (xAxisrestricted)
         {
-            _directionalInputRestrictedX = true;           
+            _directionalInputRestrictedX = true;
         }
         else
         {
@@ -342,4 +347,99 @@ public void RestrictMovement(bool xAxisrestricted, bool yAxisRestricted)
         }
     }
 
+    /// <summary>
+    ///  Player FSM
+    /// </summary>
+    /// 
+
+
+    void PlayerStates()
+    {
+        switch (playerStates.currentState)
+        {
+            case global::PlayerStates.State.standing: Standing(); break;
+            case global::PlayerStates.State.walking: Walking(); break;
+            case global::PlayerStates.State.falling: Falling(); break;
+            case global::PlayerStates.State.jumping: Jumping(); break;
+            default: break;
+        }
+    }
+
+    void Standing()
+    {
+        print("STANDING");
+        if (WalkingTransition())
+        {
+            playerStates.currentState = global::PlayerStates.State.walking;
+        }
+        if (JumpTransition())
+        {
+            playerStates.currentState = global::PlayerStates.State.jumping;
+        }
+    }
+    void Walking()
+    {
+        print("WALKING");
+        if (StandingTransition())
+        {
+            playerStates.currentState = global::PlayerStates.State.standing;
+        }
+        if (FallingTransition())
+        {
+            playerStates.currentState = global::PlayerStates.State.falling;
+        }
+        if (JumpTransition())
+        {
+            playerStates.currentState = global::PlayerStates.State.jumping;
+        }
+    }
+
+    void Falling()
+    {
+        print("FALLING");
+        if (WalkingTransition())
+        {
+            playerStates.currentState = global::PlayerStates.State.walking;
+        }
+        else if (StandingTransition())
+        {           
+            playerStates.currentState = global::PlayerStates.State.standing;
+        }        
+    }
+    
+    void Jumping()
+    {
+        print("JUMPING");
+        if (FallingTransition())
+        {
+            playerStates.currentState = global::PlayerStates.State.falling;
+        }
+        else if (StandingTransition())
+        {           
+            playerStates.currentState = global::PlayerStates.State.standing;
+        }
+    }
+
+/// <summary>
+///  State transitions
+/// </summary>
+
+     bool StandingTransition()
+    {
+        return (controllerStates.IsGrounded && Mathf.Abs(velocity.x) < 0.3);       
+    }
+    bool WalkingTransition()
+    {
+        return (controllerStates.IsGrounded && Mathf.Abs(velocity.x) >= 0.3);
+    }
+
+    bool FallingTransition()
+    {
+        return controllerStates.IsFalling;
+    }
+
+    bool JumpTransition()
+    {       
+        return controllerStates.IsNormalJumping;   
+    }
 }

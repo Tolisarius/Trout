@@ -37,6 +37,7 @@ public class ControllerStates : MonoBehaviour
 
     /// Is the character grounded ? 
     public bool IsGrounded { get { return IsCollidingBelow; } }
+
     /// is the character falling right now ?
     public bool IsFalling { get; set; }
 
@@ -68,11 +69,14 @@ public class ControllerStates : MonoBehaviour
         slopeAngleOld = slopeAngle;
         slopeAngle = 0;
 
+      
         /// ground collision must be reset only when it is not on the ground or moving platform, ie falling, jumping, aerial attacks etc.
         if (IsFalling || IsNormalJumping)
         {
             IsCollidingBelow = false;
+
         }
+      
 
         ///reseting falling
         if (JustGotGrounded || IsGrounded)
@@ -85,6 +89,7 @@ public class ControllerStates : MonoBehaviour
         {
             IsNormalJumping = false;
         }
+        
     }
 
 
