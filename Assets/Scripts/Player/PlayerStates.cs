@@ -23,7 +23,7 @@ public class PlayerStates : MonoBehaviour {
 
     public enum State
     {
-        current, standing, walking, jumping,falling
+        current, standing, walking, jumping,falling,wallSliding
     }
 
     public State currentState=State.standing;

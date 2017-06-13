@@ -58,7 +58,7 @@ public class Controller2D : RaycastController
 
         /// is controller falling?
         Vector2 _currentPosition = gameObject.transform.position;
-        if ((_currentPosition.y + _smallMovement.y < _oldPosition.y) && !controllerStates.isStandingOnPlatform && !controllerStates.descendingSlope)
+        if ((_currentPosition.y + _smallMovement.y < _oldPosition.y) && !controllerStates.isStandingOnPlatform && !controllerStates.descendingSlope && !controllerStates.slidingDownMaxSlope)
         {
             controllerStates.IsFalling = true;
         }
