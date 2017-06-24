@@ -6,15 +6,17 @@ using UnityEngine;
 public class PlayerJumps : MonoBehaviour {
 
     Player player;
-    ControllerStates controllerStates;
+    PlayerStates playerStates;
 
     void Start ()
     {
 		player = GetComponent<Player>();      
+        playerStates = GetComponent<PlayerStates>();
     }
 
     public void WallLeap(int wallDirX)
     {
+        playerStates.IsWallLeaping = true;
         player.velocity.x = -wallDirX * player.wallLeap.x;
         player.velocity.y = player.wallLeap.y;
         player.RestrictMovement(true, false);
@@ -47,10 +49,21 @@ public class PlayerJumps : MonoBehaviour {
 
     void JustHitTheWallSliding()
     {
-        player.RestrictMovement(false, false);
+
+        if (playerStates.IsWallLeaping)
+        {
+            playerStates.IsWallLeaping = false;
+        }
+            player.RestrictMovement(false, false);
+
     }
     void JustGotGrounded()
-    {        
-     player.RestrictMovement(false, false);   
+    {
+        if (playerStates.IsWallLeaping)
+        {
+            playerStates.IsWallLeaping = false;
+        }
+        player.RestrictMovement(false, false);   
     }
+
 }

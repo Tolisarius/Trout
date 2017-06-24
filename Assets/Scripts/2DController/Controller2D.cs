@@ -31,7 +31,10 @@ public class Controller2D : RaycastController
         
     }
     void TimeTravellingTests()
+
     {
+        Vector2 _currentPosition = gameObject.transform.position;
+
         //has controller just grounded?
         if (!_wasGrounded && controllerStates.IsGrounded)
         {
@@ -44,7 +47,7 @@ public class Controller2D : RaycastController
             controllerStates.JustGotGrounded = false;
         }
 
-        if (_wasGrounded && !controllerStates.IsGrounded && !controllerStates.IsNormalJumping)
+        if (_wasGrounded && !controllerStates.IsGrounded && !(_currentPosition.y + _smallMovement.y > _oldPosition.y))
         {
             //print("Just left platform");
             controllerStates.JustLeftPlatform = true;
@@ -56,8 +59,7 @@ public class Controller2D : RaycastController
             //print("prave opustil movable platformu");
         }
 
-        /// is controller falling?
-        Vector2 _currentPosition = gameObject.transform.position;
+        /// is controller falling?                     
         if ((_currentPosition.y + _smallMovement.y < _oldPosition.y) && !controllerStates.isStandingOnPlatform && !controllerStates.descendingSlope && !controllerStates.slidingDownMaxSlope)
         {
             controllerStates.IsFalling = true;

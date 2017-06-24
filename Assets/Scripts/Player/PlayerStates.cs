@@ -9,12 +9,15 @@ public class PlayerStates : MonoBehaviour {
     public bool IsJumping { get; set; }
     public bool IsFalling { get; set; }
 
+    
+
     public bool IsSlopeSliging { get; set; }
 
     public bool IsWallSliding { get; set; }
     public bool WasWallSliding { get; set; }    //was wall sliding last frame
     public bool WillWallSliding { get; set; }   //just touched the wall is about to wall slide
 
+    public bool IsWallLeaping { get; set; }
 
     public bool AfterWallslideBuffer { get; set; }
 
@@ -23,7 +26,14 @@ public class PlayerStates : MonoBehaviour {
 
     public enum State
     {
-        current, standing, walking, jumping,falling,wallSliding
+        current,
+        standing,
+        walking,
+        jumping,
+        falling,
+
+        wallSliding,
+        wallLeaping
     }
 
     public State currentState=State.standing;
