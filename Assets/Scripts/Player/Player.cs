@@ -390,19 +390,15 @@ public class Player : MonoBehaviour
         animator.SetBool("IsRunning", true);
         if (StandingTransition())
         {
-            //SwitchState("IsRunning", global::PlayerStates.State.standing);
-            animator.SetBool("IsRunning", false);
-            playerStates.currentState = global::PlayerStates.State.standing;
+            SwitchState("IsRunning", global::PlayerStates.State.standing);
         }
         if (FallingTransition())
         {
-            animator.SetBool("IsRunning", false);
-            playerStates.currentState = global::PlayerStates.State.falling;
+            SwitchState("IsRunning", global::PlayerStates.State.falling);            
         }
         if (JumpTransition())
         {
-            animator.SetBool("IsRunning", false);
-            playerStates.currentState = global::PlayerStates.State.jumping;
+            SwitchState("IsRunning", global::PlayerStates.State.jumping);           
         }
     }
 
@@ -417,18 +413,15 @@ public class Player : MonoBehaviour
         animator.SetBool("IsFalling", true);
         if (WalkingTransition())
         {
-            animator.SetBool("IsFalling", false);
-            playerStates.currentState = global::PlayerStates.State.walking;
+            SwitchState("IsFalling", global::PlayerStates.State.walking);
         }
         else if (StandingTransition())
         {
-            animator.SetBool("IsFalling", false);
-            playerStates.currentState = global::PlayerStates.State.standing;
+            SwitchState("IsFalling", global::PlayerStates.State.standing);
         }
         if (WallSlidingTransition())
         {
-            animator.SetBool("IsFalling", false);
-            playerStates.currentState = global::PlayerStates.State.wallSliding;
+            SwitchState("IsFalling", global::PlayerStates.State.wallSliding);
         }
     }
 
@@ -438,18 +431,15 @@ public class Player : MonoBehaviour
         animator.SetBool("IsJumping", true);
         if (FallingTransition())
         {
-            animator.SetBool("IsJumping", false);
-            playerStates.currentState = global::PlayerStates.State.falling;
+            SwitchState("IsJumping", global::PlayerStates.State.falling);
         }
         else if (StandingTransition())
         {
-            animator.SetBool("IsJumping", false);
-            playerStates.currentState = global::PlayerStates.State.standing;
+            SwitchState("IsJumping", global::PlayerStates.State.standing);
         }
         if (WallSlidingTransition())
         {
-            animator.SetBool("IsJumping", false);
-            playerStates.currentState = global::PlayerStates.State.wallSliding;
+            SwitchState("IsJumping", global::PlayerStates.State.wallSliding);
         }
 
     }
@@ -460,28 +450,22 @@ public class Player : MonoBehaviour
 
         if (JumpTransition())
         {
-            animator.SetBool("IsWallSliding", false);
-            playerStates.currentState = global::PlayerStates.State.jumping;
+            SwitchState("IsWallSliding", global::PlayerStates.State.jumping);
         }
        
         if (StandingTransition())
         {
-            animator.SetBool("IsWallSliding", false);
-            playerStates.currentState = global::PlayerStates.State.standing;
+            SwitchState("IsWallSliding", global::PlayerStates.State.standing);
         }
         if (WallLeapTransition())
         {
-            animator.SetBool("IsWallSliding", false);
-            playerStates.currentState = global::PlayerStates.State.wallLeaping;
+            SwitchState("IsWallSliding", global::PlayerStates.State.wallLeaping);
         }
 
         else if (FallingTransition())
        {
-           animator.SetBool("IsWallSliding", false);
-           playerStates.currentState = global::PlayerStates.State.falling;
+            SwitchState("IsWallSliding", global::PlayerStates.State.falling);
        }
-        
-        
     }
 
     void WallLeap()
@@ -491,21 +475,17 @@ public class Player : MonoBehaviour
 
         if (StandingTransition())
         {
-            animator.SetBool("IsWallLeaping", false);
-            playerStates.currentState = global::PlayerStates.State.standing;
+            SwitchState("IsWallLeaping", global::PlayerStates.State.standing);
         }
         if (WallSlidingTransition())
         {
-            animator.SetBool("IsWallLeaping", false);
-            playerStates.currentState = global::PlayerStates.State.wallSliding;
+            SwitchState("IsWallLeaping", global::PlayerStates.State.wallSliding);
         }
      
         if (FallingTransition())
         {
-            animator.SetBool("IsWallLeaping", false);
-            playerStates.currentState = global::PlayerStates.State.falling;
+            StartCoroutine(SwitchStateDelayed("IsWallLeaping", global::PlayerStates.State.falling, 0.2f));            
         }     
-      
     }
 
     /// <summary>
@@ -539,9 +519,17 @@ public class Player : MonoBehaviour
         return playerStates.IsWallLeaping;
     }
 
-    void SwitchState(string animStateOff,PlayerStates.State)
+    void SwitchState(string currentAnimStateOff, global::PlayerStates.State state)
     {
-
+        
+        animator.SetBool(currentAnimStateOff, false);
+        playerStates.currentState = state;
+    }
+    IEnumerator SwitchStateDelayed(string currentAnimStateOff, global::PlayerStates.State state, float time)
+    {
+        yield return new WaitForSeconds(time);
+        animator.SetBool(currentAnimStateOff, false);
+        playerStates.currentState = state;
     }
 
 }
