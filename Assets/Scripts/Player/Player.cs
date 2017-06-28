@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
 
     float timeToWallUnstick;
 
-    float gravity;
+    [HideInInspector]
+    public float gravity;
     [HideInInspector]
     public float maxJumpVelocity, minJumpVelocity;
     [HideInInspector]
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
     Controller2D controller;
     public ControllerStates controllerStates;
     PlayerJumps playerJumps;
+    PlayerAttacks playerAttacks;
     PlayerStates playerStates;
 
     Animator animator;
@@ -64,8 +66,9 @@ public class Player : MonoBehaviour
         controller = GetComponent<Controller2D>();
         controllerStates = controller.controllerStates;
         playerJumps = GetComponent<PlayerJumps>();
-        playerStates = GetComponent<PlayerStates>();
+        playerStates = GetComponent<PlayerStates>();       
         animator = GetComponent<Animator>();
+        playerAttacks = GetComponent<PlayerAttacks>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -122,6 +125,9 @@ public class Player : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Controlls stuff
+    /// </summary>
     public void OnJumpInputDown()
     {
         _jumpPressed = true;
@@ -188,6 +194,27 @@ public class Player : MonoBehaviour
             velocity.y = minJumpVelocity;
         }
     }
+
+    public void OnAttackInputDown()
+    {
+        if (controllerStates.IsGrounded)
+        {
+            print("ATTACK on GROUND!");
+            playerAttacks.NormalAttack();
+        }
+        else if (playerStates.currentState== global::PlayerStates.State.jumping || playerStates.currentState == global::PlayerStates.State.falling)
+        {
+            playerAttacks.AerialAttack();
+        }
+    }
+    public void OnAttackInputDownWithDirectionDown()
+    {
+        if (playerStates.currentState == global::PlayerStates.State.jumping || playerStates.currentState == global::PlayerStates.State.falling)
+        {
+            playerAttacks.SmashAttack();
+            print("TROUT SMASH!!!");
+        }
+    } 
 
     /// <summary>
     /// Physics stuff
@@ -364,8 +391,11 @@ public class Player : MonoBehaviour
             case global::PlayerStates.State.jumping: Jumping(); break;
             case global::PlayerStates.State.wallSliding: WallSliding(); break;
             case global::PlayerStates.State.wallLeaping: WallLeap(); break;
+            case global::PlayerStates.State.attackingNormal: AttackNormal(); break;
+            case global::PlayerStates.State.attackingAerial:AttackAerial(); break;
+            case global::PlayerStates.State.attackingSmash: AttackSmash(); break;
 
-            default: break;
+            default: print("SOMETHING IS FUCKED UP WITH PLAYER STATE"); break;
         }
     }
 
@@ -373,73 +403,101 @@ public class Player : MonoBehaviour
     {
         //print("STANDING");
         animator.SetBool("IsStanding", true);
-        if (WalkingTransition())
+
+        if (T_WallSlidingTransition())
         {
-            animator.SetBool("IsStanding", false);
-            playerStates.currentState = global::PlayerStates.State.walking;
+            SwitchState("IsStanding", global::PlayerStates.State.wallSliding);
         }
-        if (JumpTransition())
+        else if (T_JumpTransition())
         {
-            animator.SetBool("IsStanding", false);
-            playerStates.currentState = global::PlayerStates.State.jumping;
+            SwitchState("IsStanding", global::PlayerStates.State.jumping);
+        }
+        else if (T_AttackingNormal())
+        {
+            SwitchState("IsStanding", global::PlayerStates.State.attackingNormal);
+        }
+
+        else if (T_WalkingTransition())
+        {
+            SwitchState("IsStanding", global::PlayerStates.State.walking);
         }
     }
     void Walking()
     {
         //print("WALKING");
         animator.SetBool("IsRunning", true);
-        if (StandingTransition())
+        if (T_StandingTransition())
         {
             SwitchState("IsRunning", global::PlayerStates.State.standing);
         }
-        if (FallingTransition())
+        else if (T_FallingTransition())
         {
-            SwitchState("IsRunning", global::PlayerStates.State.falling);            
+            SwitchState("IsRunning", global::PlayerStates.State.falling);
         }
-        if (JumpTransition())
+        else if (T_JumpTransition())
         {
-            SwitchState("IsRunning", global::PlayerStates.State.jumping);           
+            SwitchState("IsRunning", global::PlayerStates.State.jumping);
         }
     }
 
+
     void Falling()
     {
-        /*print("FALLING");
-        if (playerStates.IsWallLeaping)
-        {
-            playerStates.IsWallLeaping = false;
-        }
-        */
+        //print("FALLING");
         animator.SetBool("IsFalling", true);
-        if (WalkingTransition())
-        {
-            SwitchState("IsFalling", global::PlayerStates.State.walking);
-        }
-        else if (StandingTransition())
-        {
-            SwitchState("IsFalling", global::PlayerStates.State.standing);
-        }
-        if (WallSlidingTransition())
+
+        if (T_WallSlidingTransition())
         {
             SwitchState("IsFalling", global::PlayerStates.State.wallSliding);
         }
+        else if (T_WallLeapTransition())
+        {
+            SwitchState("IsFalling", global::PlayerStates.State.wallLeaping);
+        }
+        else if (T_AttackingSmash())
+        {
+            SwitchState("IsFalling", global::PlayerStates.State.attackingSmash);
+        }
+        else if (T_AttackingAerial())
+        {
+            SwitchState("IsFalling", global::PlayerStates.State.attackingAerial);
+        }
+        else if (T_WalkingTransition())
+        {
+            SwitchState("IsFalling", global::PlayerStates.State.walking);
+        }
+
+        else if (T_StandingTransition())
+        {
+            SwitchState("IsFalling", global::PlayerStates.State.standing);
+        }
+
     }
 
     void Jumping()
     {
         //print("JUMPING");
         animator.SetBool("IsJumping", true);
-        if (FallingTransition())
+
+        if (T_WallSlidingTransition())
         {
-            SwitchState("IsJumping", global::PlayerStates.State.falling);
+            SwitchState("IsJumping", global::PlayerStates.State.wallSliding);
         }
-        else if (StandingTransition())
+        else if (T_AttackingSmash())
+        {
+            SwitchState("IsJumping", global::PlayerStates.State.attackingSmash);
+        }
+        else if (T_AttackingAerial())
+        {
+            SwitchState("IsJumping", global::PlayerStates.State.attackingAerial);
+        }
+        else if (T_StandingTransition())
         {
             SwitchState("IsJumping", global::PlayerStates.State.standing);
         }
-        if (WallSlidingTransition())
+        else if (T_FallingTransition())
         {
-            SwitchState("IsJumping", global::PlayerStates.State.wallSliding);
+            SwitchState("IsJumping", global::PlayerStates.State.falling);
         }
 
     }
@@ -448,88 +506,138 @@ public class Player : MonoBehaviour
         print("WALL SLIDING PYCO!!!");
         animator.SetBool("IsWallSliding", true);
 
-        if (JumpTransition())
-        {
-            SwitchState("IsWallSliding", global::PlayerStates.State.jumping);
-        }
-       
-        if (StandingTransition())
+        if (T_StandingTransition())
         {
             SwitchState("IsWallSliding", global::PlayerStates.State.standing);
         }
-        if (WallLeapTransition())
+        else if (T_WallLeapTransition())
         {
             SwitchState("IsWallSliding", global::PlayerStates.State.wallLeaping);
         }
 
-        else if (FallingTransition())
-       {
+        else if (T_FallingTransition())
+        {
             SwitchState("IsWallSliding", global::PlayerStates.State.falling);
-       }
+        }
+
     }
 
     void WallLeap()
     {
-        print("WALL LEAPING");
+        print("WALL LEAPING");       
         animator.SetBool("IsWallLeaping", true);
 
-        if (StandingTransition())
-        {
-            SwitchState("IsWallLeaping", global::PlayerStates.State.standing);
-        }
-        if (WallSlidingTransition())
+        if (T_WallSlidingTransition())
         {
             SwitchState("IsWallLeaping", global::PlayerStates.State.wallSliding);
         }
-     
-        if (FallingTransition())
+        else if (T_AttackingSmash())
         {
-            StartCoroutine(SwitchStateDelayed("IsWallLeaping", global::PlayerStates.State.falling, 0.2f));            
-        }     
+            SwitchState("IsWallLeaping", global::PlayerStates.State.attackingSmash);
+        }
+        /*else if (FallingTransition())
+        {
+            SwitchState("IsWallLeaping", global::PlayerStates.State.falling);
+            //StartCoroutine(SwitchStateDelayed("IsWallLeaping", global::PlayerStates.State.falling, 0.3f));
+        }
+        */
+
+        else if (T_StandingTransition())
+        {
+            SwitchState("IsWallLeaping", global::PlayerStates.State.standing);
+        }
     }
+    void AttackNormal()
+    {
+        animator.SetBool("IsAttackingNormal", true);
+        if (!T_AttackingNormal())
+        {
+            SwitchState("IsAttackingNormal", global::PlayerStates.State.standing);
+        }       
+    }
+
+    void AttackAerial()
+    {       
+        animator.SetBool("IsAttackingAerial", true);
+        if (!T_AttackingAerial())
+        {
+            SwitchState("IsAttackingAerial", global::PlayerStates.State.falling);
+        }
+    }
+
+    void AttackSmash()
+    {
+        animator.SetBool("IsAttackingSmash", true);
+        if (!T_AttackingSmash())
+        {
+            SwitchState("IsAttackingSmash", global::PlayerStates.State.standing);
+        }
+    }
+
 
     /// <summary>
     ///  State transitions
     /// </summary>
 
-    bool StandingTransition()
+    bool T_StandingTransition()
     {
-        return (controllerStates.IsGrounded && Mathf.Abs(velocity.x) < 0.3);
+        return (controllerStates.IsGrounded && Mathf.Abs(velocity.x) < 1);
     }
-    bool WalkingTransition()
+    bool T_WalkingTransition()
     {
-        return (controllerStates.IsGrounded && Mathf.Abs(velocity.x) >= 0.3);
+        return (controllerStates.IsGrounded && Mathf.Abs(velocity.x) >= 1);
     }
 
-    bool FallingTransition()
+    bool T_FallingTransition()
     {
         return (controllerStates.IsFalling && !playerStates.IsWallSliding);
     }
 
-    bool JumpTransition()
+    bool T_JumpTransition()
     {
         return (controllerStates.IsNormalJumping);
     }
-    bool WallSlidingTransition()
+    bool T_WallSlidingTransition()
     {
         return (playerStates.IsWallSliding);
     }
-    bool WallLeapTransition()
+    bool T_WallLeapTransition()
     {
         return playerStates.IsWallLeaping;
     }
+    bool T_AttackingNormal()
+    {
+        return playerStates.IsAttackingNormal;
+    }
+    bool T_AttackingAerial()
+    {
+        return playerStates.IsAttackingAerial;
+    }
+    bool T_AttackingSmash()
+    {
+        return playerStates.IsAttackingSmash;
+    }
 
     void SwitchState(string currentAnimStateOff, global::PlayerStates.State state)
-    {
-        
+    {       
         animator.SetBool(currentAnimStateOff, false);
         playerStates.currentState = state;
     }
     IEnumerator SwitchStateDelayed(string currentAnimStateOff, global::PlayerStates.State state, float time)
     {
-        yield return new WaitForSeconds(time);
         animator.SetBool(currentAnimStateOff, false);
+        yield return new WaitForSeconds(time);       
         playerStates.currentState = state;
     }
 
+    void AnimStateReset()
+    {
+       /* animator.SetBool("IsStanding", false);
+        animator.SetBool("IsRunning", false);
+        animator.SetBool("IsFalling", false);
+        animator.SetBool("IsJumping", false);
+        animator.SetBool("IsWallSliding", false);
+        animator.SetBool("IsWallLeaping", false);                  
+        */
+    }
 }

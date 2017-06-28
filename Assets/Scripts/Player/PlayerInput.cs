@@ -25,5 +25,17 @@ public class PlayerInput : MonoBehaviour
         {
             player.OnJumpInputUp();
         }
+
+        if (Input.GetButtonDown("Attack") )
+        {
+            if (Mathf.Sign(directionalInput.y) == -1)
+            {
+                player.OnAttackInputDownWithDirectionDown();
+            }
+            else
+            {          
+                player.OnAttackInputDown();
+            }
+        }
     }
 }

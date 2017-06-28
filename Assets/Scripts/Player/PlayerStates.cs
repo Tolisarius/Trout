@@ -18,8 +18,11 @@ public class PlayerStates : MonoBehaviour {
     public bool WillWallSliding { get; set; }   //just touched the wall is about to wall slide
 
     public bool IsWallLeaping { get; set; }
-
     public bool AfterWallslideBuffer { get; set; }
+
+    public bool IsAttackingNormal { get; set; }
+    public bool IsAttackingAerial { get; set; }
+    public bool IsAttackingSmash { get; set; }
 
     ControllerStates controllerStates;
     Player player;
@@ -33,8 +36,13 @@ public class PlayerStates : MonoBehaviour {
         falling,
 
         wallSliding,
-        wallLeaping
+        wallLeaping,
+
+        attackingNormal,
+        attackingAerial,
+        attackingSmash
     }
+    
 
     public State currentState=State.standing;
 
