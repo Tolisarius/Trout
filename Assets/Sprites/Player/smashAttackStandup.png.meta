@@ -1,0 +1,972 @@
+fileFormatVersion: 2
+guid: b46b925e465dada4a9251b070fcf62c8
+timeCreated: 1498756686
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: smashAttackStandup_0
+    21300002: smashAttackStandup_1
+    21300004: smashAttackStandup_2
+    21300006: smashAttackStandup_3
+    21300008: smashAttackStandup_4
+    21300010: smashAttackStandup_5
+    21300012: smashAttackStandup_6
+    21300014: smashAttackStandup_7
+    21300016: smashAttackStandup_8
+    21300018: smashAttackStandup_9
+    21300020: smashAttackStandup_10
+    21300022: smashAttackStandup_11
+    21300024: smashAttackStandup_12
+    21300026: smashAttackStandup_13
+    21300028: smashAttackStandup_14
+    21300030: smashAttackStandup_15
+    21300032: smashAttackStandup_16
+    21300034: smashAttackStandup_17
+    21300036: smashAttackStandup_18
+    21300038: smashAttackStandup_19
+    21300040: smashAttackStandup_20
+    21300042: smashAttackStandup_21
+    21300044: smashAttackStandup_22
+    21300046: smashAttackStandup_23
+    21300048: smashAttackStandup_24
+    21300050: smashAttackStandup_25
+    21300052: smashAttackStandup_26
+    21300054: smashAttackStandup_27
+    21300056: smashAttackStandup_28
+    21300058: smashAttackStandup_29
+    21300060: smashAttackStandup_30
+    21300062: smashAttackStandup_31
+    21300064: smashAttackStandup_32
+    21300066: smashAttackStandup_33
+    21300068: smashAttackStandup_34
+    21300070: smashAttackStandup_35
+    21300072: smashAttackStandup_36
+    21300074: smashAttackStandup_37
+    21300076: smashAttackStandup_38
+    21300078: smashAttackStandup_39
+    21300080: smashAttackStandup_40
+    21300082: smashAttackStandup_41
+    21300084: smashAttackStandup_42
+    21300086: smashAttackStandup_43
+    21300088: smashAttackStandup_44
+    21300090: smashAttackStandup_45
+    21300092: smashAttackStandup_46
+    21300094: smashAttackStandup_47
+    21300096: smashAttackStandup_48
+    21300098: smashAttackStandup_49
+    21300100: smashAttackStandup_50
+    21300102: smashAttackStandup_51
+    21300104: smashAttackStandup_52
+    21300106: smashAttackStandup_53
+    21300108: smashAttackStandup_54
+    21300110: smashAttackStandup_55
+    21300112: smashAttackStandup_56
+    21300114: smashAttackStandup_57
+    21300116: smashAttackStandup_58
+    21300118: smashAttackStandup_59
+    21300120: smashAttackStandup_60
+    21300122: smashAttackStandup_61
+    21300124: smashAttackStandup_62
+    21300126: smashAttackStandup_63
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 220
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: smashAttackStandup_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3577
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_1
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 3577
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_2
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 3577
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_3
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 3577
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_4
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 3577
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_5
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 3577
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_6
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 3577
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_7
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 3577
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3066
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_9
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 3066
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_10
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 3066
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_11
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 3066
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_12
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 3066
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_13
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 3066
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_14
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 3066
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_15
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 3066
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2555
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_17
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 2555
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_18
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 2555
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_19
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 2555
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_20
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 2555
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_21
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 2555
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_22
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 2555
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_23
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 2555
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2044
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_25
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 2044
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_26
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 2044
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_27
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 2044
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_28
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 2044
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_29
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 2044
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_30
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 2044
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_31
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 2044
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1533
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_33
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 1533
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_34
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 1533
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_35
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 1533
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_36
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 1533
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_37
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 1533
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_38
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 1533
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_39
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 1533
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1022
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_41
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 1022
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_42
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 1022
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_43
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 1022
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_44
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 1022
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_45
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 1022
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_46
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 1022
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_47
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 1022
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 511
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_49
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 511
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_50
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 511
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_51
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 511
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_52
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 511
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_53
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 511
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_54
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 511
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_55
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 511
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_57
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 0
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_58
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 0
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_59
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 0
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_60
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 0
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_61
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 0
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_62
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 0
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: smashAttackStandup_63
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 0
+        width: 608
+        height: 511
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -356,7 +356,7 @@ public class Player : MonoBehaviour
         gameObject.transform.localScale = newScale;
     }
 
-    public void RestrictMovement(bool xAxisrestricted, bool yAxisRestricted)
+    public void RestrictMovement(bool xAxisrestricted, bool yAxisRestricted, bool jumpRestricted)
     {
         if (xAxisrestricted)
         {
@@ -374,6 +374,14 @@ public class Player : MonoBehaviour
         else
         {
             _directionalInputRestrictedY = false;
+        }
+        if (jumpRestricted)
+        {
+            playerStates.JumpRestricted=true;
+        }
+        else
+        {
+            playerStates.JumpRestricted = false;
         }
     }
 
@@ -571,6 +579,7 @@ public class Player : MonoBehaviour
         if (!T_AttackingSmash())
         {
             SwitchState("IsAttackingSmash", global::PlayerStates.State.standing);
+            RestrictMovement(false, false,false);
         }
     }
 

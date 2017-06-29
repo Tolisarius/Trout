@@ -19,7 +19,14 @@ public class PlayerJumps : MonoBehaviour {
         playerStates.IsWallLeaping = true;
         player.velocity.x = -wallDirX * player.wallLeap.x;
         player.velocity.y = player.wallLeap.y;
-        player.RestrictMovement(true, false);
+        player.RestrictMovement(true, false,false);
+    }
+
+    void WallLeapEnd()
+    {
+        playerStates.IsWallLeaping = false;
+        player.RestrictMovement(false, false,false);
+
     }
 
     public void WallClimb(int wallDirX)
@@ -52,18 +59,17 @@ public class PlayerJumps : MonoBehaviour {
 
         if (playerStates.IsWallLeaping)
         {
-            playerStates.IsWallLeaping = false;
+            WallLeapEnd();
         }
-            player.RestrictMovement(false, false);
+
 
     }
     void JustGotGrounded()
     {
         if (playerStates.IsWallLeaping)
         {
-            playerStates.IsWallLeaping = false;
-        }
-        player.RestrictMovement(false, false);   
+            WallLeapEnd();
+        }       
     }
 
 }

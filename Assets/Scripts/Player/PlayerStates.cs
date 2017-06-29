@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerStates : MonoBehaviour {
 
+    // Locks
+    public bool JumpRestricted { get; set; }
+
     // States
     public bool IsWalking { get; set; }
     public bool IsJumping { get; set; }

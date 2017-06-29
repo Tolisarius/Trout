@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttacks : MonoBehaviour {
     Player player;
     PlayerStates playerStates;
+    Animator animator;
 
     [Header("Normal attack")]
     public float normalAttackHitLenght;
@@ -12,13 +13,14 @@ public class PlayerAttacks : MonoBehaviour {
     [Header("Aerial attack")]
     public float aerialAttackLift;
     public float aerialAttackHitLenght;
+    public float aerialAttackHorizontalSpeedMult;
 
     [Header("Smash attack")]
     public float gravityAcceleration;
+    public float smashAttackLayOnGround;
 
 
-
-    float _tempGravity;
+    float _tempGravity,_tempVelocity;
 
     // Use this for initialization
     void Start()
@@ -26,6 +28,7 @@ public class PlayerAttacks : MonoBehaviour {
         
         player = GetComponent<Player>();
         playerStates = GetComponent<PlayerStates>();
+        animator = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -60,6 +63,8 @@ public class PlayerAttacks : MonoBehaviour {
         _tempGravity = player.gravity;
         player.velocity.y = aerialAttackLift;
         player.gravity = 0;
+        player.velocity.x *= aerialAttackHorizontalSpeedMult;
+        player.RestrictMovement(true, false, true);
 
         Invoke("AerialAttackEnd", aerialAttackHitLenght);
 
@@ -68,28 +73,34 @@ public class PlayerAttacks : MonoBehaviour {
     {
         playerStates.IsAttackingAerial = false;
         player.gravity = _tempGravity;
+        player.RestrictMovement(false, false, false);
     }
 
     public void SmashAttack()
     {
+        player.RestrictMovement(true, false,true);
         playerStates.IsAttackingSmash = true;
         _tempGravity = player.gravity;
         player.gravity *= gravityAcceleration;
         
     }
 
-    void SmashAttackEnd()
+    void SmashAttackLanded()
     {
-        playerStates.IsAttackingSmash = false;
         player.gravity = _tempGravity;
+        animator.SetBool("IsAttackingSmash", false);      //first disable the animation state here, so character stands up but only then it should go to Player state .standing
+    }
+
+    void SmashAttackEnd()
+    {      
+        playerStates.IsAttackingSmash = false;              
     }
 
     void JustGotGrounded()      //on event
     {
         if (playerStates.IsAttackingSmash)
-        { 
-        Invoke("SmashAttackEnd", aerialAttackHitLenght);
-        //SmashAttackEnd();
+        {           
+            Invoke("SmashAttackLanded", smashAttackLayOnGround);       
         }
     }
 
