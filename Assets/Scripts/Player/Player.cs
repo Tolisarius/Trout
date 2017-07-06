@@ -58,8 +58,11 @@ public class Player : MonoBehaviour
     int _wallDirX, _wallDirXBuffer;
 
     bool _directionalInputRestrictedX, _directionalInputRestrictedY;
+    [HideInInspector]
+    public float shiftVelocity;
 
-    string currentDirection;
+    [HideInInspector]
+    public string currentDirection;
 
     void Start()
     {
@@ -71,6 +74,7 @@ public class Player : MonoBehaviour
         playerAttacks = GetComponent<PlayerAttacks>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        print("Gravity:" + gravity);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         if (controllerStates.faceDir == -1)
@@ -285,7 +289,7 @@ public class Player : MonoBehaviour
     {
 
 
-        float targetVelocityX = directionalInput.x * moveSpeed;
+        float targetVelocityX = shiftVelocity+directionalInput.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controllerStates.IsCollidingBelow) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
     }
@@ -484,7 +488,7 @@ public class Player : MonoBehaviour
 
     void Jumping()
     {
-        //print("JUMPING");
+        print("JUMPING");
         animator.SetBool("IsJumping", true);
 
         if (T_WallSlidingTransition())

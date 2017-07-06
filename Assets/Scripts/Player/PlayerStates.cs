@@ -31,8 +31,7 @@ public class PlayerStates : MonoBehaviour {
     Player player;
 
     public enum State
-    {
-        current,
+    {       
         standing,
         walking,
         jumping,
