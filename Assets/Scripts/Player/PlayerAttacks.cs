@@ -10,7 +10,9 @@ public class PlayerAttacks : MonoBehaviour {
     GameObject areialAttackHitbox;
     GameObject smashAttackHitbox;
     
- 
+    
+    
+
 
     [Header("Normal attack")]
     public float normalAttackHitLenght;
@@ -28,7 +30,7 @@ public class PlayerAttacks : MonoBehaviour {
     public float smashAttackLayOnGround;
 
 
-    float _tempGravity, _tempVelocity;
+    float _tempGravity;
 
     // Use this for initialization
     void Start()
@@ -46,7 +48,6 @@ public class PlayerAttacks : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public void NormalAttack()
@@ -58,9 +59,34 @@ public class PlayerAttacks : MonoBehaviour {
          if there is an object with tag enemy attackSlide is enabled
          if attack slide is enabled, slide towards enemy while while still in attack pose, anly after that keep attack animation for the attack duration
          if attack slide is not enabled, just finish the attack aniamation (duration set as open variable)            
-        */       
+        */
+
         player.RestrictMovement(true, false, true);
-        TargetTest();
+       
+        Bounds bounds = normalAttackHitbox.bounds;
+        Vector2 rayOrigin = new Vector2((player.currentDirection == "left") ? bounds.min.x : bounds.max.x, bounds.center.y);
+
+        Vector2 sightDir = new Vector2((player.currentDirection == "left") ? -1f : 1f, 0f);
+        float rayLengt = shiftMax;
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, sightDir, rayLengt, collisionMask | specificColMask);
+
+        if (hit)
+        {
+            rayLengt = hit.distance;
+            if (hit.transform.gameObject.tag == "Enemy")
+            {
+                print("enemy reachable");
+                NormalAttackShift(rayLengt);
+
+            }
+        }
+        else
+        {
+            print("normal shift");
+            NormalAttackShift(shiftMin);
+        }
+        Debug.DrawRay(rayOrigin, sightDir * shiftMax, Color.blue);
+
         playerStates.IsAttackingNormal = true;
         Invoke("NormalAttackEnd", normalAttackHitLenght);
     }
@@ -68,8 +94,7 @@ public class PlayerAttacks : MonoBehaviour {
     void NormalAttackEnd()
     {
         playerStates.IsAttackingNormal = false;
-        normalAttackHitbox.enabled = false;
-        player.shiftVelocity = 0f;
+        normalAttackHitbox.enabled = false;       
         player.RestrictMovement(false, false, false);
 
     }
@@ -121,42 +146,14 @@ public class PlayerAttacks : MonoBehaviour {
         }
     }
 
-    void TargetTest()
-    {
-        //Vector2 rayOrigin = normalAttackHitbox.transform.position;
-        Bounds bounds = normalAttackHitbox.bounds;
-        Vector2 rayOrigin =  new Vector2((player.currentDirection=="left")?bounds.min.x:bounds.max.x, bounds.center.y);
-        
-        Vector2 sightDir = new Vector2((player.currentDirection == "left") ? -1f : 1f, 0f);
-        float rayLengt = shiftMax;
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, sightDir, rayLengt, collisionMask | specificColMask);
-
-            if (hit)
-            {
-                rayLengt = hit.distance;
-                if (hit.transform.gameObject.tag == "Enemy")
-                {
-                    print("enemy reachable");
-                    NormalAttackShift(rayLengt);
-                    
-                }
-            }
-            else
-            {
-                print("normal shift");
-                NormalAttackShift(shiftMin);
-            }
-       Debug.DrawRay(rayOrigin, sightDir * shiftMax, Color.blue);
-     }
+    
 
 
     void NormalAttackShift(float shift)
     {
-        //player.shiftVelocity = shift * ((player.currentDirection == "left") ? -1f : 1f);
-        //player.velocity.x = shift *((player.currentDirection == "left") ? -1f : 1f);
-        shift*= ((player.currentDirection == "left") ? -1f : 1f);
-        gameObject.transform.Translate(shift, 0f, 0f);
-
+        shift *=((player.currentDirection == "left") ? -1f : 1f);
+        Vector3 shiftVec = new Vector3(shift, 0f, 0f);
+        player.transform.Translate(shiftVec);            
     }
 
 }

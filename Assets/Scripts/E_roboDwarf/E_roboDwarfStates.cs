@@ -19,13 +19,17 @@ public class E_roboDwarfStates : MonoBehaviour {
             hitreacting,
             dying
     }
-
+    public int fullHP;
+    
     public int HitPoints { get; set; }
     public bool IsHitReacting { get; set; }
     public bool IsDying { get; set; }
 
 
-
+    private void Start()
+    {
+        HitPoints = fullHP;
+    }
 
 
 }

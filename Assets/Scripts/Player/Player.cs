@@ -58,8 +58,7 @@ public class Player : MonoBehaviour
     int _wallDirX, _wallDirXBuffer;
 
     bool _directionalInputRestrictedX, _directionalInputRestrictedY;
-    [HideInInspector]
-    public float shiftVelocity;
+
 
     [HideInInspector]
     public string currentDirection;
@@ -289,7 +288,7 @@ public class Player : MonoBehaviour
     {
 
 
-        float targetVelocityX = shiftVelocity+directionalInput.x * moveSpeed;
+        float targetVelocityX = directionalInput.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controllerStates.IsCollidingBelow) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
     }

@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\2DController\ControllerStates.cs" />
     <Compile Include="Assets\Scripts\2DController\RaycastController.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Common\Trig_DmgTarget.cs" />
     <Compile Include="Assets\Scripts\E_roboDwarf\E_roboDwarfController.cs" />
     <Compile Include="Assets\Scripts\E_roboDwarf\E_roboDwarfStates.cs" />
     <Compile Include="Assets\Scripts\EnemyStandard\E_controller.cs" />
