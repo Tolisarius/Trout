@@ -1,0 +1,328 @@
+fileFormatVersion: 2
+guid: 0416ea17cf5f5194d922edd575e48e66
+timeCreated: 1500071609
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: splashPokus_0
+    21300002: splashPokus_1
+    21300004: splashPokus_2
+    21300006: splashPokus_3
+    21300008: splashPokus_4
+    21300010: splashPokus_5
+    21300012: splashPokus_6
+    21300014: splashPokus_7
+    21300016: splashPokus_8
+    21300018: splashPokus_9
+    21300020: splashPokus_10
+    21300022: splashPokus_11
+    21300024: splashPokus_12
+    21300026: splashPokus_13
+    21300028: splashPokus_14
+    21300030: splashPokus_15
+    21300032: splashPokus_16
+    21300034: splashPokus_17
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: splashPokus_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 335.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_1
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 335.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_2
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 335.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 268.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_4
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 268.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_5
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 268.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 201.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_7
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 201.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_8
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 201.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 134.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_10
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 134.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_11
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 134.83334
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 67.833336
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_13
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 67.833336
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_14
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 67.833336
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.8333359
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_16
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 0.8333359
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: splashPokus_17
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 0.8333359
+        width: 146
+        height: 67.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

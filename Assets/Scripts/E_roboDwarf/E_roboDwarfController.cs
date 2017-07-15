@@ -25,7 +25,6 @@ public class E_roboDwarfController : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-
         enemyState.currentState = E_roboDwarfStates.State.idle;
 
     }
@@ -122,27 +121,10 @@ public class E_roboDwarfController : MonoBehaviour
     }
 
 
-
-
     void SwitchState(string currentAnimStateOff, E_roboDwarfStates.State state)
     {
         animator.SetBool(currentAnimStateOff, false);
         enemyState.currentState = state;
-    }
-
-    void TakeDamage(int dmg)
-    {
-        print("Take damage!");
-        if (enemyState.HitPoints > 0)
-        {
-            print("Hit reaction!");
-            enemyState.IsHitReacting = true;
-            Knockback();
-        }
-        else
-        {
-            enemyState.IsDying = true;
-        }
     }
 
 
@@ -154,17 +136,7 @@ public class E_roboDwarfController : MonoBehaviour
         }
     }
 
-    void Knockback()
-    {
-        print("Knockback");
-        Vector2 _knockBack = new Vector2(0f, 0f);
-        float playerDir = Mathf.Sign(gameObject.transform.position.x - player.transform.position.x);
-        print("Player position:"+ playerDir);
-        _knockBack.x = knockback * playerDir;
-        _knockBack.y = knockUp;
-        //_knockBack.y = enemyController.gravity * 0.3f * -1;
-        enemyController.velocity = _knockBack;
-    }
+  
 
 }
 

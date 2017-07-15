@@ -39,13 +39,18 @@ public class Trig_DmgTarget : MonoBehaviour
             StartCoroutine(NextHitEnabled());
             if (col.tag == target == true)
             {
-                print("Neco se stalo!!!");           
+                print("Neco se stalo!!!");
                 if (playersWeaponFreezOnHit)
                 {
                     //StartCoroutine(Pause());
-                }               
-                
-                col.SendMessageUpwards("TakeDamage",dmg);      
+                }
+
+                col.SendMessageUpwards("TakeDamage", dmg);
+                E_hitreactions e_hitreactions = col.GetComponent<E_hitreactions>();
+                if (e_hitreactions != null)
+                {
+                    //e_hitreactions.NormalHitreaction(dmg, gameObject.transform.parent.gameObject);
+                }
                 
             }
             if (col.tag != ignoreObjectType && selfDestroyOnHit)
