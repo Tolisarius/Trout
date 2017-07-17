@@ -61,8 +61,6 @@ public class Hitbox : MonoBehaviour
                 {
                     e_hitreactions.HitReaction(hitType, dmg, gameObject.transform.parent.gameObject);
                 }
-            
-
 
             }
           

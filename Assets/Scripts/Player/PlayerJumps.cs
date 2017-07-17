@@ -14,6 +14,20 @@ public class PlayerJumps : MonoBehaviour {
         playerStates = GetComponent<PlayerStates>();
     }
 
+    private void Update()
+    {
+
+        if (playerStates.IsWallLeaping)
+        {
+                      
+            print("Velocity:" + player.velocity.x);
+            if (Mathf.Abs(player.velocity.x)< player.wallLeap.x*0.2f)
+            {
+                WallLeapEnd();
+            }
+        }
+    }
+
     public void WallLeap(int wallDirX)
     {
         playerStates.IsWallLeaping = true;
@@ -61,8 +75,6 @@ public class PlayerJumps : MonoBehaviour {
         {
             WallLeapEnd();
         }
-
-
     }
     void JustGotGrounded()
     {

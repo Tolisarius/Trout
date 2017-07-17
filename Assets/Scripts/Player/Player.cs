@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         EveryFrame();
+        print("State:" + playerStates.currentState);
     }
 
 
@@ -205,14 +206,14 @@ public class Player : MonoBehaviour
             print("ATTACK on GROUND!");
             playerAttacks.NormalAttack();
         }
-        else if (playerStates.currentState== global::PlayerStates.State.jumping || playerStates.currentState == global::PlayerStates.State.falling)
+        else if (playerStates.currentState== global::PlayerStates.State.jumping || playerStates.currentState == global::PlayerStates.State.falling || playerStates.currentState == global::PlayerStates.State.wallLeaping)
         {
             playerAttacks.AerialAttack();
         }
     }
     public void OnAttackInputDownWithDirectionDown()
     {
-        if (playerStates.currentState == global::PlayerStates.State.jumping || playerStates.currentState == global::PlayerStates.State.falling)
+        if (playerStates.currentState == global::PlayerStates.State.jumping || playerStates.currentState == global::PlayerStates.State.falling || playerStates.currentState == global::PlayerStates.State.wallLeaping)
         {
             playerAttacks.SmashAttack();
             print("TROUT SMASH!!!");
@@ -287,7 +288,6 @@ public class Player : MonoBehaviour
     void CalculateVelocity()
     {
 
-
         float targetVelocityX = directionalInput.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controllerStates.IsCollidingBelow) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
@@ -308,7 +308,6 @@ public class Player : MonoBehaviour
     }
 
     /// State tests
-
     void TimeTravelingTests()
     {
         if (playerStates.WasWallSliding && !playerStates.IsWallSliding)            //print("Just has left wallsliding");   
@@ -369,7 +368,6 @@ public class Player : MonoBehaviour
         {
             _directionalInputRestrictedX = false;
         }
-
         if (yAxisRestricted)
         {
             _directionalInputRestrictedY = true;
@@ -427,7 +425,6 @@ public class Player : MonoBehaviour
         {
             SwitchState("IsStanding", global::PlayerStates.State.attackingNormal);
         }
-
         else if (T_WalkingTransition())
         {
             SwitchState("IsStanding", global::PlayerStates.State.walking);
@@ -448,6 +445,10 @@ public class Player : MonoBehaviour
         else if (T_JumpTransition())
         {
             SwitchState("IsRunning", global::PlayerStates.State.jumping);
+        }
+        else if (T_AttackingNormal())
+        {
+            SwitchState("IsRunning", global::PlayerStates.State.attackingNormal);
         }
     }
 
@@ -546,13 +547,20 @@ public class Player : MonoBehaviour
         {
             SwitchState("IsWallLeaping", global::PlayerStates.State.attackingSmash);
         }
-        /*else if (FallingTransition())
+        else if (T_AttackingAerial())
+        {
+            SwitchState("IsWallLeaping", global::PlayerStates.State.attackingAerial);
+        }
+        else if (T_AttackingSmash())
+        {
+            SwitchState("IsWallLeaping", global::PlayerStates.State.attackingSmash);
+        }
+
+        else if (T_FallingTransition())
         {
             SwitchState("IsWallLeaping", global::PlayerStates.State.falling);
-            //StartCoroutine(SwitchStateDelayed("IsWallLeaping", global::PlayerStates.State.falling, 0.3f));
         }
-        */
-
+     
         else if (T_StandingTransition())
         {
             SwitchState("IsWallLeaping", global::PlayerStates.State.standing);
@@ -568,7 +576,8 @@ public class Player : MonoBehaviour
     }
 
     void AttackAerial()
-    {       
+    {
+        print("ATTACK AERIAL!");
         animator.SetBool("IsAttackingAerial", true);
         if (!T_AttackingAerial())
         {
@@ -602,7 +611,7 @@ public class Player : MonoBehaviour
 
     bool T_FallingTransition()
     {
-        return (controllerStates.IsFalling && !playerStates.IsWallSliding);
+        return (controllerStates.IsFalling && !playerStates.IsWallSliding && !playerStates.IsWallLeaping);
     }
 
     bool T_JumpTransition()
@@ -640,16 +649,5 @@ public class Player : MonoBehaviour
         animator.SetBool(currentAnimStateOff, false);
         yield return new WaitForSeconds(time);       
         playerStates.currentState = state;
-    }
-
-    void AnimStateReset()
-    {
-       /* animator.SetBool("IsStanding", false);
-        animator.SetBool("IsRunning", false);
-        animator.SetBool("IsFalling", false);
-        animator.SetBool("IsJumping", false);
-        animator.SetBool("IsWallSliding", false);
-        animator.SetBool("IsWallLeaping", false);                  
-        */
     }
 }

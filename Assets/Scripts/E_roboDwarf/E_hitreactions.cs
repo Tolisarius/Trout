@@ -97,6 +97,14 @@ public class E_hitreactions : MonoBehaviour {
                 _knockBack.x = smashKnockback;
                 _knockBack.y = smashKnockUp;
             }
+            else if (type == "Aerial")
+            {
+                particleBleeding.Play();
+                enemyState.IsHitReacting = true;
+                float playerDir = Mathf.Sign(gameObject.transform.position.x - sender.transform.position.x);
+                _knockBack.x = knockback * playerDir;
+                _knockBack.y = knockUp;
+            }
 
 
             enemyController.velocity = _knockBack;
